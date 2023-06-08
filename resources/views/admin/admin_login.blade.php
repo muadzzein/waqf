@@ -31,7 +31,7 @@
     <body>
 
     <div class="limiter">
-        <div class="container-login100" style="background-image: url('{{asset('images/bg-01.jpg')}}');">
+        <div class="container-login100" style="background-image: url('{{asset('images/mosque-01.jpg')}}');">
             <div class="wrap-login100">
                 @if(Session::has('error'))
                     <div class="alert alert-danger d-flex align-items-center -align-center" role="alert" >
@@ -51,7 +51,7 @@
 					</span>
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter email address">
-                        <input class="input100" type="email" name="email" id='email' placeholder="Email Address">
+                        <input class="input100" type="email" name="email" id='email' placeholder="Email Address" autofocus>
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
                     </div>
 

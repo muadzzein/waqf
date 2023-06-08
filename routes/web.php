@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TrusteeController;
 use App\Http\Controllers\DonorController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,18 +54,21 @@ Route::prefix('admin')->group(function() {
 
 Route::prefix('trustee')->group(function() {
 
-    Route::get('/login',[TrusteeController::class, 'Index'])->name('login_from');
+    Route::get('/login',[TrusteeController::class, 'TrusteeIndex'])->name('trustee_login_from');
 
-    Route::post('/login/owner',[TrusteeController::class, 'Login'])->name('trustee.login');
+    Route::post('/login/owner',[TrusteeController::class, 'TrusteeLogin'])->name('trustee.login');
 
-    Route::get('/dashboard',[TrusteeController::class, 'Dashboard'])->name('trustee.dashboard')->middleware('trustee');
+    Route::get('/dashboard',[TrusteeController::class, 'TrusteeDashboard'])->name('trustee.dashboard')->middleware('trustee');
 
-    Route::get('/logout',[TrusteeController::class, 'TrusteeLogout'])->name('trustee.logout')->middleware('admin');
+    Route::get('/logout',[TrusteeController::class, 'TrusteeLogout'])->name('trustee.logout')->middleware('trustee');
 
 
 });
 
 /* ----------------- End Trustee Route ----------------- */
+
+Route::resource('user',UserController::class)->shallow();
+Route::get('user',[UserController::class, 'index'])->name('user.index');
 
 
 Route::get('/', function () {

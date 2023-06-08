@@ -19,7 +19,10 @@ class CreateTrusteesTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_no','25');
             $table->tinyInteger('stauts')->default(1);
+            $table->unsignedBigInteger('donor_id');
+            $table->foreign('donor_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

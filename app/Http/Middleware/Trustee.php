@@ -17,9 +17,10 @@ class Trustee
      */
     public function handle(Request $request, Closure $next)
     {
-    if(!Auth::guard('trustee')->check()){
-        return redirect()->route('seller_login_from')->with('error','Please Login First');
-    }
-    return $next($request);
+        if(!Auth::guard('trustee')->check()){
+            return redirect()->route('trustee_login_from')->with('error','Please Login First');
+        }
+
+        return $next($request);
     }
 }

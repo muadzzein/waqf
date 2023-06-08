@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Trustee;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -15,7 +18,9 @@ class AdminController extends Controller
     }
 
     public function Dashboard(){
-        return view('admin.index');
+        $user = User::all();
+        $trustee = Trustee::all();
+        return view('admin.index', compact('user', 'trustee'));
     }
 
     public function Login(Request $request){
@@ -35,6 +40,17 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('login_from')->with('error','Admin Logout Successfully');
     }
+    function addDonor(Request $req){
 
+        User::insert([
+            'name'=> $req->name,
+            'email'=> $req->email,
+            'password'=> Hash::make($req->password),
+            'created_at'=> Carbon::now(),
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Donor created successfully');
+
+    }
 
 }

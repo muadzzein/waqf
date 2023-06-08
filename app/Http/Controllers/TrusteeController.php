@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use Auth;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
-class TrusteeController extends AuthenticatedSessionController
+class TrusteeController extends Controller
 {
     /**
      * Show the trustee login form.
      *
      * @return \Illuminate\View\View
      */
-    public function showLoginForm()
+    /*public function showLoginForm()
     {
         return view('auth.login', ['type' => 'trustee']);
     }
@@ -27,7 +27,7 @@ class TrusteeController extends AuthenticatedSessionController
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(Request $request)
+    /*public function login(Request $request)
     {
         $request->validate([
             'email' => 'required|string',
@@ -46,7 +46,7 @@ class TrusteeController extends AuthenticatedSessionController
     public function showRegistrationForm()
     {
         return view('auth.register', ['type' => 'trustee']);
-    }
+    }*/
 
     /**
      * Handle a registration request for the application.
@@ -56,7 +56,35 @@ class TrusteeController extends AuthenticatedSessionController
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function register(Request $request)
+
+    public function TrusteeIndex(){
+        return view('trustee.trustee_login');
+    }
+
+    public function TrusteeDashboard(){
+        return view('trustee.index');
+    }
+
+    public function TrusteeLogin(Request $request){
+        //dd($request->all());
+
+        $check = $request->all();
+
+        if(Auth::guard('trustee')->attempt(['email'=>$check['email'],'password'=>$check['password']])){
+            return redirect()->route('trustee.dashboard')->with('error','Trustee Login Successfully');
+        }else{
+            return back()->with('error', 'Invalid Email or Password');
+        }
+    }
+
+    public function TrusteeLogout(){
+
+        Auth::guard('trustee')->logout();
+        return redirect()->route('trustee_login_from')->with('error','Trustee Logout Successfully');
+    }
+
+
+    /*public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -74,6 +102,6 @@ class TrusteeController extends AuthenticatedSessionController
         Auth::guard('trustee')->login($trustee);
 
         return redirect()->route('trustee.dashboard');
-    }
+    }*/
 }
 

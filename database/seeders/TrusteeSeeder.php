@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Trustee;
 use Illuminate\Database\Seeder;
 
 class TrusteeSeeder extends Seeder
@@ -13,6 +14,6 @@ class TrusteeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Trustee::factrory(1)->create();
     }
 }
