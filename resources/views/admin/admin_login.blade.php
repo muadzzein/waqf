@@ -42,9 +42,9 @@
                 @endif
                     <form action="{{route('admin.login')}}" method="POST">
                         @csrf
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
+                        <div style="display: flex; justify-content: center;">
+                            <img src="{{asset('images/logo.jpg')}}" alt="image" >
+                        </div>
 
                     <span class="login100-form-title p-b-34 p-t-27">
 						Log in

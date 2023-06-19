@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Trustee;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,13 +25,14 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+
+    protected  $primaryKey='id';
     protected $fillable = [
         'name',
         'email',
         'password',
         'phone_no',
-        'file_name',
-        'file_path',
+
     ];
 
     /**
@@ -61,7 +63,7 @@ class User extends Authenticatable
      */
    public function trustee():HasOne
    {
-       return $this->hasOne(Trustee::class);
+       return $this->hasOne(Trustee::class,'donor_id','id');
    }
 
 

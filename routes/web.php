@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TrusteeController;
-use App\Http\Controllers\DonorController;
+use App\Http\Controllers\FaraidController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\PusherController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +64,8 @@ Route::prefix('trustee')->group(function() {
     Route::get('/dashboard',[TrusteeController::class, 'TrusteeDashboard'])->name('trustee.dashboard')->middleware('trustee');
 
     Route::get('/logout',[TrusteeController::class, 'TrusteeLogout'])->name('trustee.logout')->middleware('trustee');
+    Route::get('/trustee/list',[TrusteeController::class, 'TrusteeList'])->name('trustee.list');
+    Route::get('/trustee/edit', [TrusteeController::class,'TrusteeEdit'])->name('trustee.edit');
 
 
 });
@@ -70,13 +75,27 @@ Route::prefix('trustee')->group(function() {
 Route::resource('user',UserController::class)->shallow();
 Route::get('user',[UserController::class, 'index'])->name('user.index');
 
+Route::get('calculator',[FaraidController::class, 'index'])->name('faraid.index');
+Route::post('calculate',[FaraidController::class, 'calculate'])->name('faraid.calculate');
+
+Route::get('/contact', [Controller::class, 'contact'])->name('contact');
+Route::get('/about', [Controller::class, 'about'])->name('about');
+
+/*--------------------- Live Chat --------------------*/
+
+//
+Route::get('/chat', [PusherController::class, 'index'])->name('chat');
+Route::post('/broadcast', [PusherController::class, 'broadcast']);
+Route::post('/receive', [PusherController::class, 'receive']);
+
+
+/*--------------------- End Live Chat --------------------*/
+
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth'])->name('user.dashboard');
 
 require __DIR__.'/auth.php';

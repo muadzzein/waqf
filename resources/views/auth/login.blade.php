@@ -1,56 +1,137 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DonorLogin</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{{asset('images/icons/favicon.ico')}}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('fonts/iconic/css/material-design-iconic-font.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/animate/animate.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/css-hamburgers/hamburgers.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/animsition/css/animsition.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/select2/select2.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/daterangepicker/daterangepicker.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/util.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
+    <!--===============================================================================================-->
+</head>
+<body>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('{{asset('images/mosque-01.jpg')}}');">
+        <div class="wrap-login100">
+            @if(Session::has('error'))
+                <div class="alert alert-danger d-flex align-items-center -align-center" role="alert" >
+                    <div>
+                        {{ session::get('error')}}
+                    </div>
+                </div>
+            @endif
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+            <form action="{{route('login')}}" method="POST">
+                @csrf
+                <div style="display: flex; justify-content: center;">
+                    <img src="{{asset('images/logo.jpg')}}" alt="image" >
+                </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+                <span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
+                <div class="wrap-input100 validate-input" data-validate = "Enter email address">
+                    <input class="input100" type="email" name="email" id='email' placeholder="Email Address" autofocus>
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                </div>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input class="input100" type="password" name="password" id='password' placeholder="Password">
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <div class="contact100-form-checkbox">
+                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                    <label class="label-checkbox100" for="ckb1">
+                        Remember me
+                    </label>
+                </div>
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Login
+                    </button>
+                </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                <div class="text-center p-t-90 font-extrabold">
+                    <a class="txt1" href="{{route('trustee_login_from')}}">
+                        Switch to Trustee?
                     </a>
-                @endif
+                </div>
 
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+                <div class="text-center ">
+                    @if(Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{asset('vendor/animsition/js/animsition.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{asset('vendor/bootstrap/js/popper.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{asset('vendor/daterangepicker/moment.min.js')}}"></script>
+<script src="{{asset('vendor/daterangepicker/daterangepicker.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{asset('vendor/countdowntime/countdowntime.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{asset('js/main.js')}}"></script>
+
+<script>
+    function sendPostRequest(){
+        var data = {
+            name: $("#name").val()
+        };
+        var headers = {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+
+        $.ajax({
+            url: "/save",
+            type: "post",
+            headers: headers,
+            data: data,
+            success:function(res){
+
+            }
+        });
+    }
+</script>
+</body>
+</html>
+<?php

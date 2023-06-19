@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Trustee;
 
 class TrusteeController extends Controller
 {
@@ -62,7 +64,11 @@ class TrusteeController extends Controller
     }
 
     public function TrusteeDashboard(){
-        return view('trustee.index');
+
+
+        $trustee = Trustee::with('user')->first();
+        $user = $trustee->user;
+        return view('trustee.master', compact( 'trustee','user'));
     }
 
     public function TrusteeLogin(Request $request){
@@ -77,6 +83,17 @@ class TrusteeController extends Controller
         }
     }
 
+    public function TrusteeList()
+    {
+            $trustees = Trustee::all();
+            return view('trustee.list', compact('trustees'));
+
+    }
+    public function TrusteeEdit($id)
+    {
+        $trustee = Trustee::find($id);
+        return view('trustee.edit', compact('trustee'));
+    }
     public function TrusteeLogout(){
 
         Auth::guard('trustee')->logout();

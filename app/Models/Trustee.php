@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,12 +21,15 @@ class Trustee extends Authenticatable
      *
      * @var string[]
      */
+
+    protected $primaryKey='id';
     protected $guard = 'trustee';
     protected $fillable = [
         'name',
         'email',
         'password',
         'stauts',
+        'phone_no',
     ];
 
     /**
@@ -51,6 +55,6 @@ class Trustee extends Authenticatable
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'foreign_key');
+        return $this->belongsTo(User::class,'donor_id','id');
     }
 }

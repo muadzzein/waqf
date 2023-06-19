@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Login</title>
+    <title>Trustee Login</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,9 +43,9 @@
 
             <form action="{{route('trustee.login')}}" method="POST">
                 @csrf
-                <span class="login100-form-logo">
-						<i src="images/mosque-01.jpg"></i>
-					</span>
+                <div style="display: flex; justify-content: center;">
+                    <img src="{{asset('images/logo.jpg')}}" alt="image" >
+                </div>
 
                 <span class="login100-form-title p-b-34 p-t-27">
 						Log in

@@ -32,22 +32,22 @@
                     <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
                         <li class="mr-3 flex-1">
                             <a href="{{route('user.index')}}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
-                                <i class="fas fa-tasks pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Donors</span>
+                                <i class="fas fa-user pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Donors</span>
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="{{asset('#')}}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                                <i class="fa fa-envelope pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Trustees</span>
+                            <a href="{{route('trustee.list')}}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                                <i class="fa fa-handshake pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Trustees</span>
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="{{asset('#')}}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
-                                <i class="fas fa-chart-area pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Calculator</span>
+                            <a href="{{route('faraid.index')}}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                                <i class="fas fa-calculator pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Calculator</span>
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="{{asset('#')}}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                                <i class="fa fa-wallet pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Payments</span>
+                            <a href="{{route('chat')}}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                                <i class="fas fa-comment pr-0 md:pr-3 text-yellow-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Chat</span>
                             </a>
                         </li>
                     </ul>
@@ -72,7 +72,10 @@
                         </div>
                     </div>
                 @endif
-                <h3 >Welcome, {{ Auth::guard('admin')->user()->name }}</h3>
+                <div class="alert alert-info" role="alert">
+                    Welcome, {{ Auth::guard('admin')->user()->name }}
+                </div>
+
 
                 <div class="w-full md:w-1/2 xl:w-1/2 p-6">
                     <div class="bg-white border-transparent rounded-lg shadow-xl">
